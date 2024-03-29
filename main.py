@@ -7,11 +7,7 @@ import pandas as pd
 import io
 from concurrent.futures import ThreadPoolExecutor
 
-# Get the current directory path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-template_folder = os.path.join(current_dir, 'templates')
-
-app = Flask(__name__, template_folder=template_folder)
+app = Flask(__name__)
 
 # Function to scrape the total number of albums from a given URL
 def get_album_count(url):
