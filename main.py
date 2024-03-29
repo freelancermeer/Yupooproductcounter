@@ -7,11 +7,10 @@ import pandas as pd
 import io
 from concurrent.futures import ThreadPoolExecutor
 
-app = Flask(__name__)
-
-# Get the current directory path
+# Get the current directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
-template_path = os.path.join(current_dir, 'index.html')
+
+app = Flask(__name__, template_folder=current_dir)
 
 # Function to scrape the total number of albums from a given URL
 def get_album_count(url):
@@ -53,9 +52,7 @@ def home():
             mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )
 
-    return render_template(template_path)
+    return render_template('index.html')
 
 if __name__ == '__main__':
-    # Use the PORT environment variable if available, otherwise default to 5000
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True)
